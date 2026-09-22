@@ -51,12 +51,7 @@ const INACTIVITY_MS = 2 * 60 * 1000;
 
 // Put the role you want pinged after 2 minutes of inactivity here.
 // If INACTIVE_ROLE_ID is not set, the bot falls back to MOD_ROLE_ID.
-const INACTIVE_ROLE_ID =
-    process.env.INACTIVE_ROLE_ID || process.env.MOD_ROLE_ID || null;
 
-// Optional: force inactivity alerts into one channel.
-// If empty, the bot uses the last channel where a member spoke.
-const INACTIVITY_CHANNEL_ID = process.env.INACTIVITY_CHANNEL_ID || null;
 
 const MAX_WARNINGS = 3;
 const TIMEOUT_DURATION = 60 * 60 * 1000;
