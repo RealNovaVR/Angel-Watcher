@@ -633,23 +633,22 @@ client.once(Events.ClientReady, readyClient => {
     console.log("⏳ Inactivity monitor is active: 2 minutes.");
 });
 
-// ============================================================
-// HTTP KEEP-ALIVE
-// ============================================================
-
-const http = require("http");
-const PORT = process.env.PORT || 3000;
-
-const server = http.createServer((req, res) => {
-    res.writeHead(200, {
-        "Content-Type": "text/plain; charset=utf-8"
+client.once(Events.ClientReady, readyClient => {
+    readyClient.user.setPresence({
+        activities: [
+            {
+                name: BOT_STATUS,
+                type: ActivityType.Playing
+            }
+        ],
+        status: "online"
     });
 
-    res.end("Final Tag VR Discord bot is online!");
-});
-
-server.listen(PORT, "0.0.0.0", () => {
-    console.log(`🌐 Web server listening on port ${PORT}`);
+    console.log(`✅ Logged in as ${readyClient.user.tag}`);
+    console.log(`🎮 Status: Playing ${BOT_STATUS}`);
+    console.log("🛡️ Moderation system is active.");
+    console.log("📜 Rule lookup is active: r1? through r11?");
+    console.log("⏳ Inactivity monitor is active: 2 minutes.");
 });
 
 // ============================================================
