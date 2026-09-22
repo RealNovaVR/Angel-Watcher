@@ -8,6 +8,22 @@ require("dotenv").config();
 
 const commands = [
     new SlashCommandBuilder()
+        .setName("rules")
+        .setDescription("Show all Final Tag VR server rules"),
+
+    new SlashCommandBuilder()
+        .setName("rule")
+        .setDescription("Show one specific server rule")
+        .addIntegerOption(option =>
+            option
+                .setName("number")
+                .setDescription("The rule number to show (1-11)")
+                .setMinValue(1)
+                .setMaxValue(11)
+                .setRequired(true)
+        ),
+
+    new SlashCommandBuilder()
         .setName("warnings")
         .setDescription("View a user's warnings")
         .addUserOption(option =>
@@ -49,7 +65,7 @@ const rest = new REST({ version: "10" })
 
 (async () => {
     try {
-        console.log("Registering slash commands...");
+        console.log("Registering Final Tag VR slash commands...");
 
         await rest.put(
             Routes.applicationGuildCommands(
@@ -61,6 +77,6 @@ const rest = new REST({ version: "10" })
 
         console.log("✅ Slash commands registered!");
     } catch (error) {
-        console.error(error);
+        console.error("❌ Could not register slash commands:", error);
     }
 })();
