@@ -1,0 +1,21 @@
+services:
+  - type: worker
+    name: final-tag-vr-bot
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: DISCORD_TOKEN
+        sync: false
+      - key: PREFIX
+        value: "!"
+      - key: BANNED_WORDS
+        sync: false
+      - key: SNEAK_PEEK_CHANNEL_ID
+        sync: false
+      - key: SNEAK_PEEK_ROLE_ID
+        sync: false
+      - key: SNEAK_PEEK_STAFF_ROLE_ID
+        sync: false
+      - key: MOD_LOG_CHANNEL_ID
+        sync: false

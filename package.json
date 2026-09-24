@@ -1,18 +1,17 @@
 {
-  "name": "my-discord-bot",
+  "name": "final-tag-vr-discord-bot",
   "version": "1.0.0",
-  "description": "Discord moderation bot",
-  "main": "index.js",
+  "private": true,
+  "description": "Professional Discord moderation and sneak peek bot.",
+  "main": "src/index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node src/index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
+  "engines": {
+    "node": ">=20"
+  },
   "dependencies": {
-    "discord.js": "^14.27.0",
-    "dotenv": "^18.0.1",
-    "express": "^4.21.2"
+    "discord.js": "^14.22.1",
+    "dotenv": "^16.6.1"
   }
 }
