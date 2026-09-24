@@ -39,7 +39,7 @@ function ruleEmbed(number) {
     .setFooter({ text: "Final Tag VR • Server Rules" });
 }
 
-client.once("ready", async () => {
+client.once("clientready", async () => {
   console.log(`Logged in as ${client.user.tag}`);
 
   client.user.setPresence({
