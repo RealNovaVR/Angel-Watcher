@@ -8,6 +8,16 @@ const {
   Routes
 } = require("discord.js");
 
+const DIRECT_BAD_WORDS = [
+  "fuck",
+  "shit",
+  "ass",
+  "nigga",
+  "nigger",
+  "hitler",
+  "nazi",
+];
+
 const config = require("./config");
 const rules = require("./rules");
 const { moderateMessage } = require("./moderation");
