@@ -8,17 +8,6 @@ const {
   Routes
 } = require("discord.js");
 
-const http = require("http");
-
-const PORT = process.env.PORT || 3000;
-
-http.createServer((req, res) => {
-  res.writeHead(200, { "Content-Type": "text/plain" });
-  res.end("Final Tag VR bot is online.\n");
-}).listen(PORT, "0.0.0.0", () => {
-  console.log(`Health server listening on port ${PORT}`);
-});
-
 const config = require("./config");
 const rules = require("./rules");
 const { moderateMessage } = require("./moderation");
@@ -50,7 +39,7 @@ function ruleEmbed(number) {
     .setFooter({ text: "Final Tag VR • Server Rules" });
 }
 
-client.once("clientready", async () => {
+client.once("clientReady", async () => {
   console.log(`Logged in as ${client.user.tag}`);
 
   client.user.setPresence({
@@ -69,15 +58,24 @@ client.once("clientready", async () => {
   }
 });
 
-client.on("messageCreate", async message => {
+client.on("messageCreate", async (message) => {
   if (!message.guild || message.author.bot) return;
 
-  const content = message.content.trim().toLowerCase();
-  const match = /^r(\\d{1,2})\\?$/.exec(content);
+  const content = message.content.trim();
+  const match = /^r(\d{1,2})\?$/.exec(content);
+
   if (match) {
     const number = Number(match[1]);
-    if (rules[number]) {
-      await message.reply({ embeds: [ruleEmbed(number)] }).catch(() => {});
+    const rule = rules[number];
+    if (rule) {
+      await message.reply({
+        embeds: [{
+          title: `📜 Final Tag VR — Rule ${number}`,
+          description: rule,
+          color: 0x5865F2,
+          footer: { text: "Final Tag VR • Server Rules" }
+        }]
+      }).catch(() => {});
     }
     return;
   }
@@ -98,5 +96,15 @@ client.on("interactionCreate", async interaction => {
 
 client.on("error", console.error);
 process.on("unhandledRejection", console.error);
+
+const http = require("http");
+const PORT = Number(process.env.PORT || 3000);
+
+http.createServer((req, res) => {
+  res.writeHead(200, {"Content-Type":"text/plain; charset=utf-8"});
+  res.end("Final Tag VR bot is online.\n");
+}).listen(PORT, "0.0.0.0", () => {
+  console.log(`Health server listening on port ${PORT}`);
+});
 
 client.login(config.token);
